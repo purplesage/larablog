@@ -18,6 +18,6 @@ Route::get('/', function () {
   return view('posts', ['posts' => Post::all()]);
 });
 
-Route::get('post/{post}', function ($slug) {
-  return view('post', ['post' => Post::find($slug)]);
+Route::get('post/{id}', function ($id) {
+  return view('post', ['post' => Post::find($id)]);
 })->where('post', '[A-z_\-]+');
