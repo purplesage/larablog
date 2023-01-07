@@ -23,6 +23,6 @@ class DatabaseSeeder extends Seeder
 
     Post::factory(3)->create(['user_id' => $user]);
 
-    Post::factory(2)->create(['user_id' => $user2]);
+    Post::factory(6)->create(['user_id' => $user2]);
   }
 }
