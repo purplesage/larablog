@@ -5,16 +5,13 @@
   
   <div class="py-6 px-5">
       <div>
-          <img src="./images/illustration-3.png" alt="Blog Post illustration" class="rounded-xl">
+          <img src="/images/illustration-3.png" alt="Blog Post illustration" class="rounded-xl">
       </div>
 
       <div class="mt-8 flex flex-col justify-between">
           <header>
               <div class="space-x-2">
-                  <a href="/categories/{{$post->category->slug}}"
-                      class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
-                      style="font-size: 10px">{{$post->category->name}}</a>
-        
+                <x-category-button :category="$post->category" />
               </div>
 
               <div class="mt-4">
@@ -39,7 +36,7 @@
 
           <footer class="flex justify-between items-center mt-8">
               <div class="flex items-center text-sm">
-                  <img src="./images/lary-avatar.svg" alt="Lary avatar">
+                  <img src="/images/lary-avatar.svg" alt="Lary avatar">
                   <div class="ml-3">
                       <a href="/authors/{{$post->author->userName}}">
                         <h5 class="font-bold">{{$post->author->name}}</h5>
