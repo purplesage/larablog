@@ -8,7 +8,7 @@
       <x-post-grid :posts="$posts" />
 
     @else
-      <p>No posts yet. Please check back later</p>  
+      <p class="text-center">No posts yet. Please check back later</p>  
     @endif
   </main>
   </x-layout>
