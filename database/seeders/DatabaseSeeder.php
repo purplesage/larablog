@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
     $user2 = User::Factory()->create(['name' => 'Purple Sage']);
 
 
-    Post::factory(3)->create(['user_id' => $user]);
+    Post::factory(10)->create(['user_id' => $user]);
 
-    Post::factory(6)->create(['user_id' => $user2]);
+    Post::factory(20)->create(['user_id' => $user2]);
   }
 }

@@ -9,5 +9,7 @@
     @else
       <p class="text-center">No posts yet. Please check back later</p>  
     @endif
+
+    {{$posts->links()}}
   </main>
   </x-layout>
