@@ -28,9 +28,3 @@ class PostFactory extends Factory
     ];
   }
 }
-
-
-
-
-      /* 'excerpt' => $this->faker->paragraph(5),
-      'body' => $this->faker->paragraph(30), */

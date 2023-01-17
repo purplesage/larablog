@@ -11,13 +11,15 @@ class Comment extends Model
 {
   use HasFactory;
 
-  public function user()
+  protected $guarded = [];
+
+  public function author()
   {
-    $this->belongsTo(User::class);
+    return $this->belongsTo(User::class, 'user_id');
   }
 
   public function post()
   {
-    $this->belongsTo(Post::class);
+    return $this->belongsTo(Post::class);
   }
 }
