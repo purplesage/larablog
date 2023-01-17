@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\CommentController;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
@@ -17,3 +18,4 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
+Route::post('posts/{post:slug}/comment', [CommentController::class, 'store'])->middleware('auth');

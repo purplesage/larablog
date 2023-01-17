@@ -54,7 +54,8 @@
         </div>
         <section class="col-span-8 col-start-5 mt-10 space-y-6">
 
-          <form method="POST" action="#" class="border border-gray-200 p-6 rounded-xl">
+          @auth
+          <form method="POST" action="/posts/{{$post->slug}}/comment" class="border border-gray-200 p-6 rounded-xl">
             @csrf
             <header class="flex items-center">
               <img class="rounded-full" src="https://i.pravatar.cc/60?u={{auth()->id()}}" alt="avatar" width="40"
@@ -72,8 +73,8 @@
                 class="bg-blue-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-blue-600 "
                 type="submit">Post</button>
             </div>
-
           </form>
+          @endauth
 
 
           @foreach ($post->comments as $comment)
