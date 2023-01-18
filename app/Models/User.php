@@ -63,12 +63,3 @@ class User extends Authenticatable
     return $this->hasMany(Comment::class);
   }
 }
-
-
-/* protected $fillable = [
-    'name',
-    'email',
-    'password',
-    'userName',
-    'email_verified_at'
-  ]; */
