@@ -5,25 +5,14 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NewsletterController;
 
-Route::get('ping', function () {
-  $mailchimp = new \MailchimpMarketing\ApiClient();
-
-  $mailchimp->setConfig([
-    'apiKey' => config('services.mailchimp.key'),
-    'server' => 'us18'
-  ]);
-
-  $response = $mailchimp->lists->addListMember("317737b965", [
-    'email_address' => 'danielmendoza1200@gmail.com',
-    'status' => 'subscribed'
-  ]);
-  ddd($response);
-});
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('post/{post:slug}', [PostController::class, 'show']);
+
+Route::post('newsletter', [NewsletterController::class, 'subscribe']);
 
 Route::middleware(['guest'])->group(function () {
   Route::get('register', [RegisterController::class, 'create']);
