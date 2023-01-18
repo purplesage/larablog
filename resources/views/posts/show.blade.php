@@ -65,7 +65,10 @@
 
             <div class="mt-6">
               <textarea class="w-full text-sm focus:outline-none focus:ring" name="body" rows="5"
-                placeholder="Quick, think of something to say"></textarea>
+                placeholder="Quick, think of something to say" required></textarea>
+              @error('body')
+              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+              @enderror
             </div>
 
             <div class="flex justify-end mt-6 pt-6 border-t border-gray-200">
@@ -74,6 +77,11 @@
                 type="submit">Post</button>
             </div>
           </form>
+          @else
+          <p class="font-semibold">
+            <a class="hover:underline" href="/register">Register</a> or <a class="hover:underline" href="/login">Log in
+            </a>to leave a comment
+          </p>
           @endauth
 
 
