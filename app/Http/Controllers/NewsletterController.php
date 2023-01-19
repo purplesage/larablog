@@ -2,34 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use Illuminate\Http\Request;
+use App\services\Newsletter;
 use Illuminate\Validation\ValidationException;
+use Exception;
 
 class NewsletterController extends Controller
 {
-
-  protected function getClient()
+  public function __invoke(Newsletter $newsletter)
   {
-    $mailchimp = new \MailchimpMarketing\ApiClient();
-
-    return $mailchimp->setConfig([
-      'apiKey' => config('services.mailchimp.key'),
-      'server' => 'us18'
-    ]);
-  }
-
-  public function subscribe(Request $request)
-  {
-    $request->validate([
+    request()->validate([
       'email' => ['required', 'email']
     ]);
 
     try {
-      $this->getClient()->lists->addListMember(config('services.mailchimp.master_list_key'), [
-        'email_address' => $request->input('email'),
-        'status' => 'subscribed'
-      ]);
+      $newsletter->subscribe(request('email'));
     } catch (Exception $e) {
       throw ValidationException::withMessages([
         'email' => 'This email could not be added to our newsletter list'

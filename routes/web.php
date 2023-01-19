@@ -9,10 +9,8 @@ use App\Http\Controllers\NewsletterController;
 
 
 Route::get('/', [PostController::class, 'index'])->name('home');
-
 Route::get('post/{post:slug}', [PostController::class, 'show']);
 
-Route::post('newsletter', [NewsletterController::class, 'subscribe']);
 
 Route::middleware(['guest'])->group(function () {
   Route::get('register', [RegisterController::class, 'create']);
@@ -23,3 +21,5 @@ Route::middleware(['guest'])->group(function () {
 
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
 Route::post('posts/{post:slug}/comment', [CommentController::class, 'store'])->middleware('auth');
+
+Route::post('newsletter', NewsletterController::class);
