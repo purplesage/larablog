@@ -31,18 +31,20 @@ class PostController extends Controller
 
   public function store()
   {
+
     $attributes = request()->validate([
       'title' => ['required', ValidationRule::unique('posts', 'title')],
+      'thumbnail' => ['required', 'image'],
       'excerpt' => ['required'],
       'body' => ['required'],
       'category_id' => ['required', ValidationRule::exists('categories', 'id')],
     ]);
 
-
     Post::create([
       ...$attributes,
       'user_id' => auth()->user()->id,
-      'slug' => Str::of(request('title'))->slug('-')
+      'slug' => Str::of(request('title'))->slug('-'),
+      'thumbnail' => request()->file('thumbnail')->store('thumbnails')
     ]);
 
     return redirect('/')->with('sucess', 'Your post has been published!');

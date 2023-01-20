@@ -2,7 +2,7 @@
   <div class="border border-gray-200 p-6 rounded-xl mt-10 w-1/3 mx-auto">
     <section class="col-span-8 col-start-5 space-y-6">
       <h1 class="text-center font-bold text-xl">Create Post</h1>
-      <form action="/admin/posts" method="post">
+      <form action="/admin/posts" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-6">
@@ -12,6 +12,16 @@
           <input value="{{ old('title') }}" class="border border-gray-400 p-2 w-full" type="text" name="title"
             id="title" required />
           @error('title')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+          @enderror
+        </div>
+
+        <div class="mb-6">
+          <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="title">
+            Thumbnail
+          </label>
+          <input class="border border-gray-400 p-2 w-full" type="file" name="thumbnail" id="thumbnail">
+          @error('thumbnail')
           <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
           @enderror
         </div>
@@ -48,6 +58,7 @@
 
             <option {{old('category_id')==$category->id ? 'selected' : ''}}
               value="{{$category->id}}">{{ucwords($category->name)}}</option>
+
             @endforeach
           </select>
 
