@@ -1,10 +1,16 @@
+@php
+$imgURL = $post->thumbnail == '/images/illustration-3.png'
+? $post->thumbnail
+: asset('storage/' . $post->thumbnail);
+@endphp
+
 <x-layout>
   <section class="px-6 py-8">
 
     <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
       <article class="max-w-4xl mx-auto lg:grid lg:grid-cols-12 gap-x-10">
         <div class="col-span-4 lg:text-center lg:pt-14 mb-10">
-          <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="" class="rounded-xl">
+          <img src="{{ $imgURL }}" alt="" class="rounded-xl">
 
           <p class="mt-4 block text-gray-400 text-xs">
             Published <time>{{$post->created_at->diffForHumans()}}</time>
@@ -14,7 +20,7 @@
             <img src="/images/lary-avatar.svg" alt="Lary avatar">
             <div class="ml-3 text-left">
               <h5 class="font-bold">
-                <a href="/?author={{$post->author->userName}}">{{$post->author->name}}</a>
+                <a href="/?author={{$post->author->username}}">{{$post->author->name}}</a>
               </h5>
               <h6>awsome author</h6>
             </div>
@@ -52,38 +58,9 @@
             {!!$post->body!!}
           </div>
         </div>
+
         <section class="col-span-8 col-start-5 mt-10 space-y-6">
-
-          @auth
-          <form method="POST" action="/posts/{{$post->slug}}/comment" class="border border-gray-200 p-6 rounded-xl">
-            @csrf
-            <header class="flex items-center">
-              <img class="rounded-full" src="https://i.pravatar.cc/60?u={{auth()->id()}}" alt="avatar" width="40"
-                height="40">
-              <h2 class="ml-4">Want to participate?</h2>
-            </header>
-
-            <div class="mt-6">
-              <textarea class="w-full text-sm focus:outline-none focus:ring" name="body" rows="5"
-                placeholder="Quick, think of something to say" required></textarea>
-              @error('body')
-              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-              @enderror
-            </div>
-
-            <div class="flex justify-end mt-6 pt-6 border-t border-gray-200">
-              <button
-                class="bg-blue-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-blue-600 "
-                type="submit">Post</button>
-            </div>
-          </form>
-          @else
-          <p class="font-semibold">
-            <a class="hover:underline" href="/register">Register</a> or <a class="hover:underline" href="/login">Log in
-            </a>to leave a comment
-          </p>
-          @endauth
-
+          <x-newsletter-form :post="$post" />
           @foreach ($post->comments as $comment)
           <x-post-comment :comment="$comment" />
           @endforeach
@@ -92,16 +69,3 @@
     </main>
   </section>
 </x-layout>
-
-
-
-
-{{-- <article>
-  <h1>{{$post->title}}</h1>
-
-  Wrote by <a href="/authors/{{$post->author->userName}}">{{$post->author->name}}</a> in <a
-    href="#">{{$post->category->name}}</a>
-
-  <p>{!!$post->body!!}</p>
-</article>
-<a href="/">Go back</a> --}}
