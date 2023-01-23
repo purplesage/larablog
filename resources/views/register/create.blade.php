@@ -4,10 +4,10 @@
       <h1 class="text-center font-bold text-xl">Register</h1>
       <form method="POST" action="/register" class="mt-10">
         @csrf
-        <x-form-input name='name' type='text' />
-        <x-form-input name='username' type='text' />
-        <x-form-input name='email' type='email' />
-        <x-form-input name='password' type='password' />
+        <x-form-input name='name' type='text' required />
+        <x-form-input name='username' type='text' required />
+        <x-form-input name='email' type='email' required />
+        <x-form-input name='password' type='password' required />
 
         <x-form-button type='submit'>
           Submit

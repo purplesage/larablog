@@ -4,10 +4,10 @@
     <section class=" col-span-8 col-start-5 space-y-6">
     <form action="/admin/posts" method="post" enctype="multipart/form-data">
       @csrf
-      <x-form-input name='title' type='text' />
-      <x-form-input name='thumbnail' type='file' />
-      <x-form-textarea name='excerpt' />
-      <x-form-textarea name='body' />
+      <x-form-input name='title' type='text' :value=false />
+      <x-form-input name='thumbnail' type='file' :value=false />
+      <x-form-textarea name='excerpt' :value=false />
+      <x-form-textarea name='body' :value=false />
 
       <div class="mb-6">
         <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="category_id">
