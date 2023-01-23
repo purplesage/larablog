@@ -12,13 +12,8 @@ use App\Http\Controllers\NewsletterController;
 Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('post/{post:slug}', [PostController::class, 'show']);
 
-Route::middleware(['admin'])->group(function () {
-  Route::get('admin/posts/create', [AdminPostController::class, 'create'])->name('createPost');
-  Route::get('admin/posts', [AdminPostController::class, 'index'])->name('adminAllPosts');
-  Route::post('admin/posts', [AdminPostController::class, 'store']);
-  Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit']);
-  Route::patch('admin/posts/{post}', [AdminPostController::class, 'update']);
-  Route::delete('admin/posts/{post}', [AdminPostController::class, 'destroy']);
+Route::middleware(['can:admin'])->group(function () {
+  Route::resource('admin/posts', AdminPostController::class)->except('show');
 });
 
 Route::middleware(['guest'])->group(function () {
